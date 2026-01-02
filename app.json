@@ -13,9 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "com.spaceteam42.dtmoney",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.spaceteam42.dtmoney",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
