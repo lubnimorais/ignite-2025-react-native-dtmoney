@@ -9,22 +9,33 @@ import { IAuthRoutesParamsList } from '@/routes/auth.routes';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 
-type ILoginFormParams = {
+type IRegisterFormParams = {
   email: string;
+  name: string;
   password: string;
+  confirmPassword: string;
 };
 
-export function LoginForm() {
+export function RegisterForm() {
   const navigation = useNavigation<IAuthRoutesParamsList>();
 
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<ILoginFormParams>();
+  } = useForm<IRegisterFormParams>();
 
   return (
     <View>
+      <Input
+        control={control}
+        name="name"
+        label="NOME"
+        placeholder="Seu nome"
+        leftIconName="person"
+        secureTextEntry
+      />
+
       <Input
         control={control}
         name="email"
@@ -42,20 +53,29 @@ export function LoginForm() {
         secureTextEntry
       />
 
+      <Input
+        control={control}
+        name="confirmPassword"
+        label="CONFIRMAR SENHA"
+        placeholder="Confirme sua senha"
+        leftIconName="lock-outline"
+        secureTextEntry
+      />
+
       <View className="min-h-[250px] flex-1 justify-between mt-8 mb-6">
-        <Button iconName="arrow-forward">Login</Button>
+        <Button iconName="arrow-forward">Cadastrar</Button>
 
         <View>
           <Text className="text-base text-gray-300 mb-6">
-            Ainda não possui uma conta?
+            Já possui uma conta?
           </Text>
 
           <Button
             mode="outline"
             iconName="arrow-forward"
-            onPress={() => navigation.navigate('registerScreen')}
+            onPress={() => navigation.navigate('loginScreen')}
           >
-            Cadastrar
+            Acessar
           </Button>
         </View>
       </View>

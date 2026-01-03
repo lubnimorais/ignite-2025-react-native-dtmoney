@@ -1,26 +1,34 @@
-
-import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack'
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 
 import { LoginScreen } from '@/app/login';
-import { Register } from '@/app/register';
+import { RegisterScreen } from '@/app/register';
 
 type IAuthRoutesRoutes = {
-  login: undefined;
-  register: undefined
-}
+  loginScreen: undefined;
+  registerScreen: undefined;
+};
 
-export type IAuthRoutesParamsList = NativeStackNavigationProp<IAuthRoutesRoutes>;
+export type IAuthRoutesParamsList =
+  NativeStackNavigationProp<IAuthRoutesRoutes>;
 
-const AuthRoutesStack = createNativeStackNavigator<IAuthRoutesRoutes>()
+const AuthRoutesStack = createNativeStackNavigator<IAuthRoutesRoutes>();
 
 export function AuthRoutes() {
   return (
-    <AuthRoutesStack.Navigator screenOptions={{
-      headerShown: false
-    }}>
-      <AuthRoutesStack.Screen name='login' component={LoginScreen} />
+    <AuthRoutesStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <AuthRoutesStack.Screen name="loginScreen" component={LoginScreen} />
 
-      <AuthRoutesStack.Screen name="register" component={Register} />
+      <AuthRoutesStack.Screen
+        name="registerScreen"
+        component={RegisterScreen}
+      />
     </AuthRoutesStack.Navigator>
-  )
+  );
 }
