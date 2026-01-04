@@ -4,6 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useForm } from 'react-hook-form';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { schema } from './schema';
+
 import { IAuthRoutesParamsList } from '@/routes/auth.routes';
 
 import { Input } from '@/components/Input';
@@ -23,7 +27,13 @@ export function RegisterForm() {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<IRegisterFormParams>();
+  } = useForm<IRegisterFormParams>({
+    resolver: zodResolver(schema),
+  });
+
+  async function handleRegister(data: IRegisterFormParams) {
+    console.log(data);
+  }
 
   return (
     <View>
@@ -33,7 +43,8 @@ export function RegisterForm() {
         label="NOME"
         placeholder="Seu nome"
         leftIconName="person"
-        secureTextEntry
+        autoCapitalize="words"
+        autoCorrect={false}
       />
 
       <Input
@@ -42,6 +53,9 @@ export function RegisterForm() {
         label="E-MAIL"
         placeholder="mail@example.com"
         leftIconName="mail-outline"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
       />
 
       <Input
@@ -51,6 +65,8 @@ export function RegisterForm() {
         placeholder="Sua senha"
         leftIconName="lock-outline"
         secureTextEntry
+        autoCapitalize="none"
+        autoCorrect={false}
       />
 
       <Input
@@ -60,10 +76,14 @@ export function RegisterForm() {
         placeholder="Confirme sua senha"
         leftIconName="lock-outline"
         secureTextEntry
+        autoCapitalize="none"
+        autoCorrect={false}
       />
 
       <View className="min-h-[250px] flex-1 justify-between mt-8 mb-6">
-        <Button iconName="arrow-forward">Cadastrar</Button>
+        <Button iconName="arrow-forward" onPress={handleSubmit(handleRegister)}>
+          Cadastrar
+        </Button>
 
         <View>
           <Text className="text-base text-gray-300 mb-6">

@@ -16,13 +16,11 @@ type IDismissKeyboardViewProps = {
 export function DismissKeyboardView({ children }: IDismissKeyboardViewProps) {
   return (
     <SafeAreaView className="flex-1 bg-background-primary">
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <ScrollView>
-          <KeyboardAvoidingView behavior="padding" className="flex-1">
-            {children}
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </TouchableWithoutFeedback>
+      <KeyboardAvoidingView behavior="padding" className="flex-1">
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <ScrollView>{children}</ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

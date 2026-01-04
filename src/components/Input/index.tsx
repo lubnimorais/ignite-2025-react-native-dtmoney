@@ -15,6 +15,7 @@ import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import clsx from 'clsx';
 
 import { colors } from '@/shared/colors';
+import { ErrorMessage } from '../ErrorMessage';
 
 type IInputProps<T extends FieldValues> = TextInputProps & {
   control: Control<T>;
@@ -53,7 +54,7 @@ export function Input<T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field: { value, onChange } }) => (
+      render={({ field: { value, onChange }, fieldState: { error } }) => (
         <View className="w-full mt-4">
           {label && (
             <Text
@@ -104,6 +105,8 @@ export function Input<T extends FieldValues>({
               </TouchableOpacity>
             )}
           </View>
+
+          {error && <ErrorMessage>{error.message}</ErrorMessage>}
         </View>
       )}
     />
