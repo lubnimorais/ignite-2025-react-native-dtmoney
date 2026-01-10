@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -8,10 +8,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { IAuthRoutesParamsList } from '@/routes/auth.routes';
 
+import { useAuth } from '@/hooks/auth';
+
 import { schema } from './schema';
 
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
+import { AxiosError } from 'axios';
 
 type ILoginFormParams = {
   email: string;
@@ -20,6 +23,7 @@ type ILoginFormParams = {
 
 export function LoginForm() {
   const navigation = useNavigation<IAuthRoutesParamsList>();
+  const { authenticate } = useAuth();
 
   const {
     control,
@@ -31,7 +35,15 @@ export function LoginForm() {
   });
 
   async function handleSubmitLogin(data: ILoginFormParams) {
-    console.log(data);
+    console.log('🚀 ~ handleSubmitLogin ~ data:', data);
+    try {
+      await authenticate(data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log('aqiii');
+        console.log(error.response?.data);
+      }
+    }
   }
 
   function handleRegister() {

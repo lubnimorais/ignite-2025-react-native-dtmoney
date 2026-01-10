@@ -2,6 +2,8 @@ import { StatusBar, View } from 'react-native';
 
 import './src/styles/global.css';
 
+import { AuthProvider } from '@/hooks/auth';
+
 import { Routes } from '@/routes';
 
 export default function App() {
@@ -13,7 +15,9 @@ export default function App() {
         translucent
       />
 
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </View>
   );
 }
